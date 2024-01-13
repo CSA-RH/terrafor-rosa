@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Enable port forwarding
+sysctl -w net.ipv4.ip_forward=1
+# Install amazon-ssm-agent
+dnf -e 0 -q -y install https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
+
+dnf -e 0 -q -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+dnf -e 0 -q -y install git iperf3 podman wget jq bind-utils make zsh net-tools
+
+[[ ! -x /usr/local/bin/yq ]] && wget -q https://github.com/mikefarah/yq/releases/download/v4.27.5/yq_linux_amd64.tar.gz -O - | tar xvzf - -C /usr/local/bin --strip-components=0 ./yq_linux_amd64 && mv /usr/local/bin/yq_linux_amd64 /usr/local/bin/yq
+[[ ! -x /usr/local/bin/oc ]] && wget -q https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz && tar xzf openshift-client-linux.tar.gz kubectl oc && rm openshift-client-linux.tar.gz && mv oc kubectl /usr/local/bin/
+[[ ! -x /usr/local/bin/helm ]] && curl -sSL4 https://mirror.openshift.com/pub/openshift-v4/clients/helm/latest/helm-linux-amd64 -o /usr/local/bin/helm && chmod +x /usr/local/bin/helm
+
+sudo -H -u ${username} bash <<_ASUSER_
+git clone --depth 1 https://github.com/asdf-vm/asdf.git /home/${username}/.asdf
+exit
+_ASUSER_
+
+usermod -s `which zsh` ${username}
