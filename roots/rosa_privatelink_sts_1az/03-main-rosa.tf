@@ -8,7 +8,7 @@ output "next_steps" {
 
 * Create your ROSA cluster:
 
-$ rosa create cluster --region ${var.aws_region} --version ${var.ocp_version} --enable-autoscaling --min-replicas 3 --max-replicas 6 --private-link --cluster-name=${var.cluster_name} --machine-cidr=${var.cluster_cidr} --subnet-ids=${aws_subnet.rosa-subnet-priv[var.availability_zones[0]].id} --tags=Owner:${var.cluster_owner_tag},Environment:${var.environment} --sts -y
+$ rosa create cluster --region ${var.aws_region} --version ${var.ocp_version} --enable-autoscaling --min-replicas 2 --max-replicas 2 --private-link --cluster-name=${var.cluster_name} --machine-cidr=${var.cluster_cidr} --subnet-ids=${aws_subnet.rosa-subnet-priv[var.availability_zones[0]].id} --tags=Owner:${var.cluster_owner_tag},Environment:${var.environment} --sts -y
 $ rosa create operator-roles --cluster rosa-csa-test -m auto -y
 $ rosa create oidc-provider --cluster rosa-csa-test -m auto -y
 
