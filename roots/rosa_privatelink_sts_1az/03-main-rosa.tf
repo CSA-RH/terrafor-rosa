@@ -15,7 +15,7 @@ $ rosa create oidc-provider --cluster rosa-csa-test -m auto -y
 * create a route53 zone association for the egress vpc
 
 $ ZONE=$(aws route53 list-hosted-zones-by-vpc --vpc-id ${aws_vpc.rosa-vpc.id} --vpc-region ${var.aws_region} --query 'HostedZoneSummaries[*].HostedZoneId' --output text)
-  aws route53 associate-vpc-with-hosted-zone  --hosted-zone-id $ZONE --vpc VPCId=${aws_vpc.egress-vpc.id},VPCRegion=${var.aws_region} --output text
+$ aws route53 associate-vpc-with-hosted-zone  --hosted-zone-id $ZONE --vpc VPCId=${aws_vpc.egress-vpc.id},VPCRegion=${var.aws_region} --output text
 
 * Create an Admin user:
 
