@@ -18,7 +18,7 @@ variable "generic_ami" {
         eu-west-3      = "ami-0460bf124812bebfa"
         sa-east-1      = "ami-0c1b8b886626f940c"
         us-east-1      = "ami-06640050dc3f556bb"
-        us-east-2      = "ami-092b43193629811af"
+        us-east-2      = "ami-078cbc4c2d057c244"
         us-west-1      = "ami-0186e3fec9b0283ee"
         us-west-2      = "ami-0bb199dd39edd7d71"
   }
